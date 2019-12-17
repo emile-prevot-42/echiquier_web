@@ -1,16 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="color-top">
+        <div class="container">
+            <h1>Votre match a commencé.<br/>
+                <small>Vous pouvez nous envoyer un mail s’il y a un soucis. 🤭</small></h1>
+
+            <hr>
+            <div class="row">
+                {% for turn in tournament.turns %}
+                <div class="col-md-2">
+                    <h3>Tour n°{{ loop.index }}</h3>
+                    {% for match in turn.matches %}
+                            <p>{{ match.teamHome.name }} vs {{ match.teamAway.name }}</p>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <div class="container">
-        <h1>Votre match a commencé :</h1>
-        {% for turn in tournament.turns %}
-            <h3>Tour n°{{ loop.index }}</h3>
-            {% for match in turn.matches %}
-                    <p>{{ match.teamHome.name }} vs {{ match.teamAway.name }}</p>
-            {% endfor %}
-        {% endfor %}
         {% if tournament.turns | length + 3 < tournament.teams | length %}
-            Définissez le nouveau ranking pour le tour suivant :
+            <h1 style="padding-top:20px;padding-bottom: 20px;">Définition du nouveau ranking pour le tour suivant :</h1>
         {{ form_start(form) }}
 
         <table class="table">
@@ -30,8 +41,10 @@
             {% endfor %}
             </tbody>
         </table>
-        <input type="submit" />
+        <input type="submit" class="btn btn-primary" style="width:100%" />
         {{ form_end(form) }}
+        {% else %}
+            <h1 style="padding-top:20px;">Le tournois est fini ! 🏆<br/><small>Il ne peut pas y avoir plus de {{ tournament.teams | length - 3 }} tours pour {{ tournament.teams | length }} équipes.</small></h1>
         {% endif %}
     </div>
 {% endblock %}

@@ -28,8 +28,11 @@
             {% endfor %}
             </tbody>
         </table>
-        <input type="submit" />
-        {{ form_end(form) }}
+        <div class="row appendme">
+            <div class="col-md-6"><input type="submit" class="btn btn-primary" style="width:100%" /></div>
+        </div>
+    {{ form_end(form) }}
+
     </div>
 {% endblock %}
 
@@ -37,12 +40,15 @@
     {{ parent() }}
 
     <script>
+        var nbr = {{ form.teams | length }};
         function addTeamsForm($collectionHolder) {
             // get the new index
             var index = $collectionHolder.data('index');
 
-            var newForm = "<td><input type=\"text\" id=\"teams_teams___name___name\" name=\"teams[teams][__name__][name]\" required=\"required\" maxlength=\"255\" class=\"form-control\" /></td>" +
-                "<td><input type=\"number\" id=\"teams_teams___name___rank\" name=\"teams[teams][__name__][rank]\" required=\"required\" class=\"form-control\" /></td>";
+            nbr++;
+            var newForm = "<td class=\"animated bounceInLeft\"><input type=\"text\" id=\"teams_teams___name___name\" name=\"teams[teams][__name__][name]\" value=\"Équipe "+nbr+"\" required=\"required\" maxlength=\"255\" class=\"form-control\" /></td>" +
+                "<td class=\"animated bounceInLeft\"><input type=\"number\" id=\"teams_teams___name___rank\" name=\"teams[teams][__name__][rank]\" value=\""+nbr+"\" required=\"required\" class=\"form-control\" /></td>";
+
 
             // You need this only if you didn't set 'label' => false in your tags field in TaskType
             // Replace '__name__label__' in the prototype's HTML to
@@ -65,9 +71,9 @@
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addTeamsButton = $('<button type="button" class="add_teams_link">Ajouter une équipe</button>');
+        var $addTeamsButton = $('<div class="col-md-6"><button type="button" style="width:100%" class="add_teams_link btn btn-secondary">Ajouter une équipe</button></div>');
         //var $newLinkLi = $('<td></td>');
-        $('table').append($addTeamsButton);
+        $('.appendme').append($addTeamsButton);
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of teams

@@ -131,6 +131,7 @@ class TeamController extends AbstractController
                 $turn->addMatch($match);
             }
             $entityManager->flush();
+            return $this->redirectToRoute('show_tournament', ['id' => $tournament->getId()]);
         }
 
         return $this->render('showTournament.html.twig', [
