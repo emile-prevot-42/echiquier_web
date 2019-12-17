@@ -12,8 +12,10 @@
                 <div class="col-md-2">
                     <h3>Tour n°{{ loop.index }}</h3>
                     {% for match in turn.matches %}
-                            <p>{{ match.teamHome.name }} vs {{ match.teamAway.name }}</p>
-                    {% endfor %}
+                        <table style="margin-bottom: 1em">
+                            <tr><td>vs</td><td>#{{ match.rankHome }} {{ match.teamHome.name }} <br/>#{{ match.rankAway }} {{ match.teamAway.name }}<td></tr>
+                        </table>
+                            {% endfor %}
                 </div>
                 {% endfor %}
             </div>

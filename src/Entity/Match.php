@@ -43,6 +43,16 @@ class Match
      */
     private $turn;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rankHome;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rankAway;
+
     public function __construct()
     {
     }
@@ -97,6 +107,30 @@ class Match
     public function setTurn(?turn $turn): self
     {
         $this->turn = $turn;
+
+        return $this;
+    }
+
+    public function getRankHome(): ?int
+    {
+        return $this->rankHome;
+    }
+
+    public function setRankHome(int $rankHome): self
+    {
+        $this->rankHome = $rankHome;
+
+        return $this;
+    }
+
+    public function getRankAway(): ?int
+    {
+        return $this->rankAway;
+    }
+
+    public function setRankAway(int $rankAway): self
+    {
+        $this->rankAway = $rankAway;
 
         return $this;
     }

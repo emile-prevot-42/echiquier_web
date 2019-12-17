@@ -75,6 +75,8 @@ class TeamController extends AbstractController
                 $match = new Match();
                 $match->setTeamHome($result[0]);
                 $match->setTeamAway($result[1]);
+                $match->setRankHome($result[0]->getRank());
+                $match->setRankAway($result[1]->getRank());
                 $match->setTournament($tournament);
                 $match->setTurn($turn);
                 $entityManager->persist($match);
@@ -124,6 +126,8 @@ class TeamController extends AbstractController
                 $match = new Match();
                 $match->setTeamHome($result[0]);
                 $match->setTeamAway($result[1]);
+                $match->setRankHome($result[0]->getRank());
+                $match->setRankAway($result[1]->getRank());
                 $match->setTournament($tournament);
                 $match->setTurn($turn);
                 $entityManager->persist($match);
