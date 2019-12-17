@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Votre match a commencé :</h1>
+        {% for turn in tournament.turns %}
+            <h3>Tour n°{{ loop.index }}</h3>
+            {% for match in turn.matches %}
+                    <p>{{ match.teamHome.name }} vs {{ match.teamAway.name }}</p>
+            {% endfor %}
+        {% endfor %}
+        {% if tournament.turns | length + 3 < tournament.teams | length %}
+            Définissez le nouveau ranking pour le tour suivant :
+        {{ form_start(form) }}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nom de l’équipe</th>
+                <th scope="col">Nouvelle position dans le classement</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for team in form.teams %}
+                <tr class="teams">
+                    {{ form_row(team.id) }}
+                    <td scope="row">{{ form_row(team.name, {'label':false}) }}</td>
+                    <td>{{ form_row(team.rank, {'label':false}) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" />
+        {{ form_end(form) }}
+        {% endif %}
+    </div>
+{% endblock %}

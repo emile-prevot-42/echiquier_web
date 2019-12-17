@@ -4,36 +4,18 @@ namespace App\Algo;
 
 class Team
 {
-    private $name;
+    protected $name;
 
     private $possibleRivals;
 
-    private $rank;
+    protected $rank;
 
     private $lock;
 
-    public function __construct(string $name, int $rank)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->rank = $rank;
         $this->possibleRivals = [];
         $this->lock = false;
-    }
-
-    public function getName() : string
-    {
-        return $this->name;
-    }
-
-    public function getRank() : int
-    {
-        return $this->rank;
-    }
-
-    public function setRank(int $rank) : Team
-    {
-        $this->rank = $rank;
-        return $this;
     }
 
     public function addPossibleRival(Team $rival) : Team
