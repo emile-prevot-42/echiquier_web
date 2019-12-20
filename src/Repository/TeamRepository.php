@@ -23,7 +23,7 @@ class TeamRepository extends ServiceEntityRepository
 
     public function getEchiquierPossibleTeams(Tournament $tournament)
     {
-        $query = "SELECT t.id, t.rank, t.name, GROUP_CONCAT(t2.id, ',') as can_play_with
+        $query = "SELECT t.id, t.rank, t.name, array_to_string(array_agg(t2.id), ',') as can_play_with
         FROM team t
         LEFT JOIN team t2 ON t.id != t2.id
         LEFT JOIN match m ON
